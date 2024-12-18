@@ -71,6 +71,10 @@ export default {
 				return new Response("Unexpected application webhook event type.", { status: 403 });
 			}
 
+			if (data.integration_type === ApplicationIntegrationType.GuildInstall) {
+				logger.info("Guild joined.", { ...data, timestamp });
+			}
+
 			if (data.integration_type === ApplicationIntegrationType.UserInstall) {
 				logger.info("User installed application.", { ...data, timestamp });
 			}
