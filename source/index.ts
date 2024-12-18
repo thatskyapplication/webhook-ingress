@@ -59,7 +59,7 @@ export default {
 		const logger = logtail.withExecutionContext(ctx);
 
 		if (json.type === ApplicationWebhookType.Ping) {
-			logger.info("Ping", json);
+			logger.info("Ping.", json);
 			return new Response(null, { status: 204 });
 		}
 
@@ -67,7 +67,7 @@ export default {
 			const { data, timestamp, type } = json.event;
 
 			if (type !== ApplicationWebhookEventType.ApplicationAuthorized) {
-				logger.info("Unexpected application webhook event type.", json);
+				logger.error("Unexpected application webhook event type.", json);
 				return new Response("Unexpected application webhook event type.", { status: 403 });
 			}
 
@@ -78,6 +78,7 @@ export default {
 			return new Response(null, { status: 204 });
 		}
 
+		logger.error("Unexpected application webhook type.", json);
 		return new Response("Unexpected application webhook type.", { status: 403 });
 	},
 } satisfies ExportedHandler<Env>;
