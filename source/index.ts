@@ -42,7 +42,7 @@ function logWebhookEvent(
 			return;
 		}
 		default: {
-			logger.error("Received unexpected application webhook event type.", { event, timestamp });
+			logger.warn("Received unexpected application webhook event type.", { event, timestamp });
 		}
 	}
 }
