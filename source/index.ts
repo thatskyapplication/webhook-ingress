@@ -1,6 +1,9 @@
 import { Logtail } from "@logtail/edge";
+import type { EdgeWithExecutionContext } from "@logtail/edge/dist/es6/edgeWithExecutionContext.js";
 import {
 	type APIWebhookEvent,
+	type APIWebhookEventBase,
+	type APIWebhookEventBody,
 	ApplicationIntegrationType,
 	ApplicationWebhookEventType,
 	ApplicationWebhookType,
@@ -19,6 +22,38 @@ function hexToUint8Array(hex: string) {
 	}
 
 	return uint8;
+}
+
+function logWebhookEvent(
+	{ event }: APIWebhookEventBase<ApplicationWebhookType.Event, APIWebhookEventBody>,
+	logger: EdgeWithExecutionContext,
+) {
+	const { data, timestamp, type } = event;
+
+	switch (type) {
+		case ApplicationWebhookEventType.ApplicationAuthorized: {
+			if (data.integration_type === ApplicationIntegrationType.GuildInstall) {
+				logger.info("Guild joined.", { event, timestamp });
+			}
+
+			if (data.integration_type === ApplicationIntegrationType.UserInstall) {
+				logger.info("User installed application.", { event, timestamp });
+			}
+
+			return;
+		}
+		case ApplicationWebhookEventType.EntitlementCreate: {
+			logger.info("Entitlement created.", { event, timestamp });
+			return;
+		}
+		case ApplicationWebhookEventType.QuestUserEnrollment: {
+			logger.info("Quest user enrollment.", { event, timestamp });
+			return;
+		}
+		default: {
+			logger.error("Received unexpected application webhook event type.", { event, timestamp });
+		}
+	}
 }
 
 export default {
@@ -63,26 +98,12 @@ export default {
 			return new Response(null, { status: 204 });
 		}
 
-		if (json.type === ApplicationWebhookType.Event) {
-			const { data, timestamp, type } = json.event;
-
-			if (type !== ApplicationWebhookEventType.ApplicationAuthorized) {
-				logger.error("Unexpected application webhook event type.", json);
-				return new Response("Unexpected application webhook event type.", { status: 403 });
-			}
-
-			if (data.integration_type === ApplicationIntegrationType.GuildInstall) {
-				logger.info("Guild joined.", { ...data, timestamp });
-			}
-
-			if (data.integration_type === ApplicationIntegrationType.UserInstall) {
-				logger.info("User installed application.", { ...data, timestamp });
-			}
-
-			return new Response(null, { status: 204 });
+		if (json.type !== ApplicationWebhookType.Event) {
+			logger.error("Unexpected application webhook type.", json);
+			return new Response("Unexpected application webhook type.", { status: 403 });
 		}
 
-		logger.error("Unexpected application webhook type.", json);
-		return new Response("Unexpected application webhook type.", { status: 403 });
+		logWebhookEvent(json, logger);
+		return new Response(null, { status: 204 });
 	},
 } satisfies ExportedHandler<Env>;

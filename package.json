@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@logtail/edge": "^0.5.2",
-		"discord-api-types": "^0.37.111"
+		"discord-api-types": "^0.38.8"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
