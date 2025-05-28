@@ -8,20 +8,11 @@ import {
 	ApplicationWebhookEventType,
 	ApplicationWebhookType,
 } from "discord-api-types/v10";
+import { hexToUint8Array } from "./utility/functions.js";
 
 interface Env {
 	PUBLIC_KEY: string;
 	BETTER_STACK_TOKEN: string;
-}
-
-function hexToUint8Array(hex: string) {
-	const uint8 = new Uint8Array(hex.length / 2);
-
-	for (let i = 0; i < hex.length; i += 2) {
-		uint8[i / 2] = Number.parseInt(hex.substring(i, i + 2), 16);
-	}
-
-	return uint8;
 }
 
 function logWebhookEvent(
