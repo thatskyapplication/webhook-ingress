@@ -33,6 +33,10 @@ function logWebhookEvent(
 
 			return;
 		}
+		case ApplicationWebhookEventType.ApplicationDeauthorized: {
+			logger.info("User deauthorised application.", { event, timestamp });
+			return;
+		}
 		case ApplicationWebhookEventType.EntitlementCreate: {
 			logger.info("Entitlement created.", { event, timestamp });
 			return;
