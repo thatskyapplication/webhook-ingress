@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@logtail/edge':
-        specifier: ^0.5.6
-        version: 0.5.6
       '@sentry/cloudflare':
         specifier: ^10.9.0
         version: 10.9.0(@cloudflare/workers-types@4.20250903.0)
@@ -404,22 +401,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@logtail/core@0.5.6':
-    resolution: {integrity: sha512-wbExeqFgH8mfEJ0N1X1KmBZVmh1oGyQLtHo329O9TvDqyL3tmyQnXbtEHwB0whfCKrkzHPZvWAamcv/Y8uPOZw==}
-
-  '@logtail/edge@0.5.6':
-    resolution: {integrity: sha512-b1RVu+MmWknMIzfiV+oEyFhEqQVyw7u6eaQpmv5zTeghfnfUHEwo20P1hAUqA0T1So8SYTruOvAXZphZN2E4RQ==}
-
-  '@logtail/tools@0.5.6':
-    resolution: {integrity: sha512-l6VIzOUGZs6eLIWjZD88hNyE61xjRN0xypvFvY7CGl9nH+MlBSoFobA8XPTB+JpU1Zn3UhovOJrRM2SAoVyq4Q==}
-
-  '@logtail/types@0.5.6':
-    resolution: {integrity: sha512-a7tkl2rBE24SoV1dG3Jme6sfSRtQjSonlVym0PvoBHFbretqm0FB1SQuba27zOC9qH0kcYtyJGkoFi4vpJE/tQ==}
-
-  '@msgpack/msgpack@2.8.0':
-    resolution: {integrity: sha512-h9u4u/jiIRKbq25PM+zymTyW6bhTzELvOoUd+AvYriWOAKpLGnIamaET3pnHYoI5iYphAHBI4ayx0MehR+VVPQ==}
-    engines: {node: '>= 10'}
-
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
     engines: {node: '>=8.0.0'}
@@ -453,9 +434,6 @@ packages:
   '@speed-highlight/core@1.2.7':
     resolution: {integrity: sha512-0dxmVj4gxg3Jg879kvFS/msl4s9F3T9UXC1InxgOf7t5NvcPD97u/WTA5vL/IxWHMn7qSxBozqrnnE2wvl1m8g==}
 
-  '@types/stack-trace@0.0.33':
-    resolution: {integrity: sha512-O7in6531Bbvlb2KEsJ0dq0CHZvc3iWSR5ZYMtvGgnHA56VgriAN/AU2LorfmcvAl2xc9N5fbCTRyMRRl8nd74g==}
-
   acorn-walk@8.3.2:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
     engines: {node: '>=0.4.0'}
@@ -465,14 +443,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  balanced-match@1.0.2:
-    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-
   blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
-
-  brace-expansion@2.0.1:
-    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -542,10 +514,6 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  minimatch@9.0.5:
-    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
-    engines: {node: '>=16 || 14 >=14.17'}
-
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
@@ -560,19 +528,12 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  serialize-error@8.1.0:
-    resolution: {integrity: sha512-3NnuWfM6vBYoy5gZFvHiYsVbafvI9vZv/+jlIigFn4oP4zjNPK3LhcY0xSCgeb1a5L8jO71Mit9LlNoi2UfDDQ==}
-    engines: {node: '>=10'}
-
   sharp@0.33.5:
     resolution: {integrity: sha512-haPVm1EkS9pgvHrQ/F3Xy+hgcuMV0Wm9vfIBSiwZ05k+xgb0PkBQpGsAA/oWdDobNaZTH5ppvHtzCFbnSEwHVw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
-
-  stack-trace@0.0.10:
-    resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
 
   stoppable@1.1.0:
     resolution: {integrity: sha512-KXDYZ9dszj6bzvnEMRYvxgeTHU74QBFL54XKtP3nyMuJ81CFYtABZ3bAzL2EdFUaEwJOBOgENyFj3R7oTzDyyw==}
@@ -584,10 +545,6 @@ packages:
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
-
-  type-fest@0.20.2:
-    resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
-    engines: {node: '>=10'}
 
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
@@ -872,30 +829,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@logtail/core@0.5.6':
-    dependencies:
-      '@logtail/tools': 0.5.6
-      '@logtail/types': 0.5.6
-      serialize-error: 8.1.0
-
-  '@logtail/edge@0.5.6':
-    dependencies:
-      '@cloudflare/workers-types': 4.20250903.0
-      '@logtail/core': 0.5.6
-      '@logtail/types': 0.5.6
-      '@msgpack/msgpack': 2.8.0
-      '@types/stack-trace': 0.0.33
-      minimatch: 9.0.5
-      stack-trace: 0.0.10
-
-  '@logtail/tools@0.5.6':
-    dependencies:
-      '@logtail/types': 0.5.6
-
-  '@logtail/types@0.5.6': {}
-
-  '@msgpack/msgpack@2.8.0': {}
-
   '@opentelemetry/api@1.9.0': {}
 
   '@poppinss/colors@4.1.5':
@@ -923,19 +856,11 @@ snapshots:
 
   '@speed-highlight/core@1.2.7': {}
 
-  '@types/stack-trace@0.0.33': {}
-
   acorn-walk@8.3.2: {}
 
   acorn@8.14.0: {}
 
-  balanced-match@1.0.2: {}
-
   blake3-wasm@2.1.5: {}
-
-  brace-expansion@2.0.1:
-    dependencies:
-      balanced-match: 1.0.2
 
   color-convert@2.0.1:
     dependencies:
@@ -1024,10 +949,6 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  minimatch@9.0.5:
-    dependencies:
-      brace-expansion: 2.0.1
-
   ohash@2.0.11: {}
 
   path-to-regexp@6.3.0: {}
@@ -1035,10 +956,6 @@ snapshots:
   pathe@2.0.3: {}
 
   semver@7.7.2: {}
-
-  serialize-error@8.1.0:
-    dependencies:
-      type-fest: 0.20.2
 
   sharp@0.33.5:
     dependencies:
@@ -1070,16 +987,12 @@ snapshots:
     dependencies:
       is-arrayish: 0.3.2
 
-  stack-trace@0.0.10: {}
-
   stoppable@1.1.0: {}
 
   supports-color@10.2.0: {}
 
   tslib@2.8.1:
     optional: true
-
-  type-fest@0.20.2: {}
 
   typescript@5.9.2: {}
 

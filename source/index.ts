@@ -1,6 +1,4 @@
-import { Logtail } from "@logtail/edge";
-import type { EdgeWithExecutionContext } from "@logtail/edge/dist/es6/edgeWithExecutionContext.js";
-import { withSentry } from "@sentry/cloudflare";
+import { logger, withSentry } from "@sentry/cloudflare";
 import {
 	type APIWebhookEvent,
 	type APIWebhookEventBase,
@@ -17,10 +15,9 @@ interface Env {
 	SENTRY_DATA_SOURCE_NAME: string;
 }
 
-function logWebhookEvent(
-	{ event }: APIWebhookEventBase<ApplicationWebhookType.Event, APIWebhookEventBody>,
-	logger: EdgeWithExecutionContext,
-) {
+function logWebhookEvent({
+	event,
+}: APIWebhookEventBase<ApplicationWebhookType.Event, APIWebhookEventBody>) {
 	const { data, timestamp, type } = event;
 
 	switch (type) {
@@ -53,50 +50,46 @@ function logWebhookEvent(
 	}
 }
 
-export default withSentry((env) => ({ dsn: env.SENTRY_DATA_SOURCE_NAME, sendDefaultPii: true }), {
-	async fetch(request, env, ctx) {
-		if (request.method !== "POST") {
-			return new Response(null, { status: 405 });
-		}
+export default withSentry(
+	(env) => ({ dsn: env.SENTRY_DATA_SOURCE_NAME, enableLogs: true, sendDefaultPii: true }),
+	{
+		async fetch(request, env) {
+			if (request.method !== "POST") {
+				return new Response(null, { status: 405 });
+			}
 
-		const signature = request.headers.get("X-Signature-Ed25519");
-		const timestamp = request.headers.get("X-Signature-Timestamp");
-		const body = await request.text();
+			const signature = request.headers.get("X-Signature-Ed25519");
+			const timestamp = request.headers.get("X-Signature-Timestamp");
+			const body = await request.text();
 
-		if (!(signature && timestamp && body)) {
-			return new Response(null, { status: 401 });
-		}
+			if (!(signature && timestamp && body)) {
+				return new Response(null, { status: 401 });
+			}
 
-		const encoder = new TextEncoder();
-		const message = encoder.encode(timestamp + body);
-		const signatureUint8 = hexToUint8Array(signature);
-		const publicKeyUint8 = hexToUint8Array(env.PUBLIC_KEY);
+			const encoder = new TextEncoder();
+			const message = encoder.encode(timestamp + body);
+			const signatureUint8 = hexToUint8Array(signature);
+			const publicKeyUint8 = hexToUint8Array(env.PUBLIC_KEY);
 
-		const key = await crypto.subtle.importKey("raw", publicKeyUint8, { name: "Ed25519" }, false, [
-			"verify",
-		]);
+			const key = await crypto.subtle.importKey("raw", publicKeyUint8, { name: "Ed25519" }, false, [
+				"verify",
+			]);
 
-		const verified = await crypto.subtle.verify("Ed25519", key, signatureUint8, message);
+			const verified = await crypto.subtle.verify("Ed25519", key, signatureUint8, message);
 
-		if (!verified) {
-			return new Response(null, { status: 401 });
-		}
+			if (!verified) {
+				return new Response(null, { status: 401 });
+			}
 
-		const json = JSON.parse(body) as APIWebhookEvent;
-		const logtail = new Logtail(env.BETTER_STACK_TOKEN);
-		const logger = logtail.withExecutionContext(ctx);
+			const json = JSON.parse(body) as APIWebhookEvent;
 
-		if (json.type === ApplicationWebhookType.Ping) {
-			logger.info("Ping.", json);
+			if (json.type === ApplicationWebhookType.Ping) {
+				logger.info("Ping.", { json });
+				return new Response(null, { status: 204 });
+			}
+
+			logWebhookEvent(json);
 			return new Response(null, { status: 204 });
-		}
-
-		if (json.type !== ApplicationWebhookType.Event) {
-			logger.error("Unexpected application webhook type.", json);
-			return new Response(null, { status: 403 });
-		}
-
-		logWebhookEvent(json, logger);
-		return new Response(null, { status: 204 });
-	},
-} satisfies ExportedHandler<Env>);
+		},
+	} satisfies ExportedHandler<Env>,
+);
