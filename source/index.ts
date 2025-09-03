@@ -11,7 +11,6 @@ import { hexToUint8Array } from "./utility/functions.js";
 
 interface Env {
 	PUBLIC_KEY: string;
-	BETTER_STACK_TOKEN: string;
 	SENTRY_DATA_SOURCE_NAME: string;
 }
 
