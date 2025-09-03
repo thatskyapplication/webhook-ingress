@@ -1,5 +1,6 @@
 import { Logtail } from "@logtail/edge";
 import type { EdgeWithExecutionContext } from "@logtail/edge/dist/es6/edgeWithExecutionContext.js";
+import { withSentry } from "@sentry/cloudflare";
 import {
 	type APIWebhookEvent,
 	type APIWebhookEventBase,
@@ -13,6 +14,7 @@ import { hexToUint8Array } from "./utility/functions.js";
 interface Env {
 	PUBLIC_KEY: string;
 	BETTER_STACK_TOKEN: string;
+	SENTRY_DATA_SOURCE_NAME: string;
 }
 
 function logWebhookEvent(
@@ -51,7 +53,7 @@ function logWebhookEvent(
 	}
 }
 
-export default {
+export default withSentry((env) => ({ dsn: env.SENTRY_DATA_SOURCE_NAME, sendDefaultPii: true }), {
 	async fetch(request, env, ctx) {
 		if (request.method !== "POST") {
 			return new Response(null, { status: 405 });
@@ -97,4 +99,4 @@ export default {
 		logWebhookEvent(json, logger);
 		return new Response(null, { status: 204 });
 	},
-} satisfies ExportedHandler<Env>;
+} satisfies ExportedHandler<Env>);
