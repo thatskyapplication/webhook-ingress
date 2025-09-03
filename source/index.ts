@@ -54,7 +54,7 @@ function logWebhookEvent(
 export default {
 	async fetch(request, env, ctx) {
 		if (request.method !== "POST") {
-			return new Response("Method not allowed.", { status: 405 });
+			return new Response(null, { status: 405 });
 		}
 
 		const signature = request.headers.get("X-Signature-Ed25519");
@@ -62,7 +62,7 @@ export default {
 		const body = await request.text();
 
 		if (!(signature && timestamp && body)) {
-			return new Response("Invalid request.", { status: 401 });
+			return new Response(null, { status: 401 });
 		}
 
 		const encoder = new TextEncoder();
@@ -77,7 +77,7 @@ export default {
 		const verified = await crypto.subtle.verify("Ed25519", key, signatureUint8, message);
 
 		if (!verified) {
-			return new Response("Invalid request.", { status: 401 });
+			return new Response(null, { status: 401 });
 		}
 
 		const json = JSON.parse(body) as APIWebhookEvent;
@@ -91,7 +91,7 @@ export default {
 
 		if (json.type !== ApplicationWebhookType.Event) {
 			logger.error("Unexpected application webhook type.", json);
-			return new Response("Unexpected application webhook type.", { status: 403 });
+			return new Response(null, { status: 403 });
 		}
 
 		logWebhookEvent(json, logger);
