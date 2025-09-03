@@ -70,13 +70,9 @@ export default {
 		const signatureUint8 = hexToUint8Array(signature);
 		const publicKeyUint8 = hexToUint8Array(env.PUBLIC_KEY);
 
-		const key = await crypto.subtle.importKey(
-			"raw",
-			publicKeyUint8,
-			{ name: "Ed25519", namedCurve: "Ed25519" },
-			true,
-			["verify"],
-		);
+		const key = await crypto.subtle.importKey("raw", publicKeyUint8, { name: "Ed25519" }, false, [
+			"verify",
+		]);
 
 		const verified = await crypto.subtle.verify("Ed25519", key, signatureUint8, message);
 
