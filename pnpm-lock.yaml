@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@sentry/cloudflare':
-        specifier: ^10.9.0
-        version: 10.9.0(@cloudflare/workers-types@4.20250903.0)
+        specifier: ^10.22.0
+        version: 10.22.0(@cloudflare/workers-types@4.20250903.0)
       discord-api-types:
-        specifier: ^0.38.22
-        version: 0.38.22
+        specifier: ^0.38.31
+        version: 0.38.31
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.2.2
@@ -414,8 +414,8 @@ packages:
   '@poppinss/exception@1.2.2':
     resolution: {integrity: sha512-m7bpKCD4QMlFCjA/nKTs23fuvoVFoA83brRKmObCUNmi/9tVu8Ve3w4YQAnJu4q3Tjf5fr685HYIC/IA2zHRSg==}
 
-  '@sentry/cloudflare@10.9.0':
-    resolution: {integrity: sha512-TTvug2tHmxxmi7gz8Stnn82YsWcesgf9ak5r0AZP7lDym2UMpt4+nDc73UUc6Ckwk/etSa/rnnR/6xn32Dic0w==}
+  '@sentry/cloudflare@10.22.0':
+    resolution: {integrity: sha512-uyONKTs5chatOnHC1xoEN7Dy4QhdQop9CB0IYVQ1K4EVpCskKKtoqWglB2NxkDNN7B8UerRuCHFiFHrKuHodPQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@cloudflare/workers-types': ^4.x
@@ -423,8 +423,8 @@ packages:
       '@cloudflare/workers-types':
         optional: true
 
-  '@sentry/core@10.9.0':
-    resolution: {integrity: sha512-beuwWUTk7yKPNTIntG6aMye+7FIslWrdd2DJ9tnl3jwHvUk1k3IZ0B4NrDuLQr2xqvqL8q2NStUD6yXg0/nLyw==}
+  '@sentry/core@10.22.0':
+    resolution: {integrity: sha512-V1oeHbrOKzxadsCmgtPku3v3Emo/Bpb3VSuKmlLrQefiHX98MWtjJ3XDGfduzD5/dCdh0r/OOLwjcmrO/PZ2aw==}
     engines: {node: '>=18'}
 
   '@sindresorhus/is@7.0.2':
@@ -471,8 +471,8 @@ packages:
     resolution: {integrity: sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA==}
     engines: {node: '>=8'}
 
-  discord-api-types@0.38.22:
-    resolution: {integrity: sha512-2gnYrgXN3yTlv2cKBISI/A8btZwsSZLwKpIQXeI1cS8a7W7wP3sFVQOm3mPuuinTD8jJCKGPGNH399zE7Un1kA==}
+  discord-api-types@0.38.31:
+    resolution: {integrity: sha512-kC94ANsk8ackj8ENTuO8joTNEL0KtymVhHy9dyEC/s4QAZ7GCx40dYEzQaadyo8w+oP0X8QydE/nzAWRylTGtQ==}
 
   error-stack-parser-es@1.0.5:
     resolution: {integrity: sha512-5qucVt2XcuGMcEGgWI7i+yZpmpByQ8J1lHhcL7PwqCwu9FPP3VUXzT4ltHe5i2z9dePwEHcDVOAfSnHsOlCXRA==}
@@ -843,14 +843,14 @@ snapshots:
 
   '@poppinss/exception@1.2.2': {}
 
-  '@sentry/cloudflare@10.9.0(@cloudflare/workers-types@4.20250903.0)':
+  '@sentry/cloudflare@10.22.0(@cloudflare/workers-types@4.20250903.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@sentry/core': 10.9.0
+      '@sentry/core': 10.22.0
     optionalDependencies:
       '@cloudflare/workers-types': 4.20250903.0
 
-  '@sentry/core@10.9.0': {}
+  '@sentry/core@10.22.0': {}
 
   '@sindresorhus/is@7.0.2': {}
 
@@ -884,7 +884,7 @@ snapshots:
 
   detect-libc@2.0.4: {}
 
-  discord-api-types@0.38.22: {}
+  discord-api-types@0.38.31: {}
 
   error-stack-parser-es@1.0.5: {}
 

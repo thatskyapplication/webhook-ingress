@@ -17,34 +17,42 @@ interface Env {
 function logWebhookEvent({
 	event,
 }: APIWebhookEventBase<ApplicationWebhookType.Event, APIWebhookEventBody>) {
-	const { data, timestamp, type } = event;
+	const { data, type } = event;
 
 	switch (type) {
 		case ApplicationWebhookEventType.ApplicationAuthorized: {
 			if (data.integration_type === ApplicationIntegrationType.GuildInstall) {
-				logger.info("Guild joined.", { event, timestamp });
+				logger.info("Guild joined.", { event });
 			}
 
 			if (data.integration_type === ApplicationIntegrationType.UserInstall) {
-				logger.info("User installed application.", { event, timestamp });
+				logger.info("User installed application.", { event });
 			}
 
 			return;
 		}
 		case ApplicationWebhookEventType.ApplicationDeauthorized: {
-			logger.info("User deauthorised application.", { event, timestamp });
+			logger.info("User deauthorised application.", { event });
 			return;
 		}
 		case ApplicationWebhookEventType.EntitlementCreate: {
-			logger.info("Entitlement created.", { event, timestamp });
+			logger.info("Entitlement created.", { event });
+			return;
+		}
+		case ApplicationWebhookEventType.EntitlementDelete: {
+			logger.info("Entitlement deleted.", { event });
+			return;
+		}
+		case ApplicationWebhookEventType.EntitlementUpdate: {
+			logger.info("Entitlement updated.", { event });
 			return;
 		}
 		case ApplicationWebhookEventType.QuestUserEnrollment: {
-			logger.info("Quest user enrollment.", { event, timestamp });
+			logger.info("Quest user enrollment.", { event });
 			return;
 		}
 		default: {
-			logger.warn("Received unexpected application webhook event type.", { event, timestamp });
+			logger.warn("Received unexpected application webhook event type.", { event });
 		}
 	}
 }

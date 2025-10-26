@@ -11,8 +11,8 @@
 		"update": "pnpm update --interactive --latest"
 	},
 	"dependencies": {
-		"@sentry/cloudflare": "^10.9.0",
-		"discord-api-types": "^0.38.22"
+		"@sentry/cloudflare": "^10.22.0",
+		"discord-api-types": "^0.38.31"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.2",
