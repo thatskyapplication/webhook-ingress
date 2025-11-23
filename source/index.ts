@@ -12,6 +12,7 @@ import { hexToUint8Array } from "./utility/functions.js";
 interface Env {
 	PUBLIC_KEY: string;
 	SENTRY_DATA_SOURCE_NAME: string;
+	CF_VERSION_METADATA: WorkerVersionMetadata;
 }
 
 function logWebhookEvent({
@@ -58,7 +59,12 @@ function logWebhookEvent({
 }
 
 export default withSentry(
-	(env) => ({ dsn: env.SENTRY_DATA_SOURCE_NAME, enableLogs: true, sendDefaultPii: true }),
+	(env) => ({
+		dsn: env.SENTRY_DATA_SOURCE_NAME,
+		enableLogs: true,
+		release: env.CF_VERSION_METADATA.id,
+		sendDefaultPii: true,
+	}),
 	{
 		async fetch(request, env) {
 			if (request.method !== "POST") {
