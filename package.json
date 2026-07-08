@@ -17,7 +17,19 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.2",
 		"@cloudflare/workers-types": "^4.20250903.0",
-		"typescript": "^5.9.2",
+		"typescript": "^6.0.3",
 		"wrangler": "^4.33.2"
+	},
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": ">=26",
+			"onFail": "error"
+		},
+		"packageManager": {
+			"name": "pnpm",
+			"version": "11.10.0",
+			"onFail": "error"
+		}
 	}
 }
